@@ -1,44 +1,53 @@
-package com.malibuatelie.domain.entity;
+package com.malibuatelie.infrastructure.persistence.entity;
 
+import com.malibuatelie.domain.entity.Product;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import java.math.BigDecimal;
 import java.util.UUID;
 
-public class Product {
+@Entity
+@Table(name = "products")
+public class ProductEntity {
 
-    // Domain rules consts can go here if needed
-
+    @Id
     private UUID id;
     private String name;
     private String description;
     private String imageUrl;
     private BigDecimal price;
 
-    public Product() {
+    public ProductEntity() {
     }
 
-    public Product(UUID id, String name, String description, String imageUrl, BigDecimal price) {
+    public ProductEntity(UUID id, String name, String description, String imageUrl, BigDecimal price) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.imageUrl = imageUrl;
         this.price = price;
-        validate();
     }
 
-    public void validate() {
-        if (name == null || name.trim().isEmpty()) {
-            throw new IllegalArgumentException("Product name cannot be empty");
-        }
-        if (price == null || price.compareTo(BigDecimal.ZERO) < 0) {
-            throw new IllegalArgumentException("Product price must be greater than or equal to zero");
-        }
+    public static ProductEntity fromDomain(Product product) {
+        return new ProductEntity(
+                product.getId(),
+                product.getName(),
+                product.getDescription(),
+                product.getImageUrl(),
+                product.getPrice());
     }
 
-    public void updateImage(String newImageUrl) {
-        this.imageUrl = newImageUrl;
-        // Business rule: maybe validate URL format here
+    public Product toDomain() {
+        return new Product(
+                this.id,
+                this.name,
+                this.description,
+                this.imageUrl,
+                this.price);
     }
 
+    // Getters and Setters
     public UUID getId() {
         return id;
     }
@@ -53,7 +62,6 @@ public class Product {
 
     public void setName(String name) {
         this.name = name;
-        validate();
     }
 
     public String getDescription() {
@@ -78,6 +86,5 @@ public class Product {
 
     public void setPrice(BigDecimal price) {
         this.price = price;
-        validate();
     }
 }

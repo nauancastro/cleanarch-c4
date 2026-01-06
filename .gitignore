@@ -49,3 +49,7 @@ logs/
 *.temp
 *.bak
 *.swp
+
+diagramas/
+uploads/
+backend_logs.txt
