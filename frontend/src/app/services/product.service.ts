@@ -26,4 +26,16 @@ export class ProductService {
     const headers = { 'Authorization': `Bearer ${token}` };
     return this.http.post<Product>(`${environment.apiUrl}/api/admin/products`, data, { headers });
   }
+
+  updateProduct(id: string, data: FormData): Observable<Product> {
+    const token = localStorage.getItem('token');
+    const headers = { 'Authorization': `Bearer ${token}` };
+    return this.http.put<Product>(`${environment.apiUrl}/api/admin/products/${id}`, data, { headers });
+  }
+
+  deleteProduct(id: string): Observable<void> {
+    const token = localStorage.getItem('token');
+    const headers = { 'Authorization': `Bearer ${token}` };
+    return this.http.delete<void>(`${environment.apiUrl}/api/admin/products/${id}`, { headers });
+  }
 }
