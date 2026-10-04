@@ -3,11 +3,9 @@
 > Repositório arquivado — mantido apenas para referência histórica.
 
 Este foi um trabalho da disciplina de Arquitetura de Software da UFC, Campus
-Quixadá. O conteúdo original da branch `maven-version` foi incorporado à
-`main` para preservação. O projeto não recebe manutenção, atualizações ou
-suporte.
+Quixadá. O projeto não recebe manutenção, atualizações ou suporte.
 
-## Conteúdo preservado
+## Estrutura do projeto
 
 - API Java com Spring Boot em `backend/`;
 - aplicação Angular em `frontend/`;
